@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/color_manager.dart';
 
 
 class OnBoardingView extends StatefulWidget {
@@ -11,6 +12,9 @@ class OnBoardingView extends StatefulWidget {
 class _OnBoardingViewState extends State<OnBoardingView> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: ColorManager.primary,
+      body: Center(child: Text("TEXT")),
+    );
   }
 }

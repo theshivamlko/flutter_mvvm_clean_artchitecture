@@ -61,9 +61,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/fonts/
-     - assets/images
-  #   - images/a_dot_ham.jpeg
+    - assets/fonts/
+    - assets/images/
+    - assets/images/1.5x/
+    - assets/images/2.0x/
+    - assets/images/3.0x/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -79,7 +81,6 @@ flutter:
   fonts:
      - family: SpicyPotatos
        fonts:
-         - asset: as
          - asset: assets/fonts/SpicyPotatos.ttf
            style: normal
 
