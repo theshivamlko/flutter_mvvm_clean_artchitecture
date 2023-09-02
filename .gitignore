@@ -31,6 +31,8 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+pubspec.lock
+flutter_mvvm_clean_artchitecture.iml
 
 # Symbolication related
 app.*.symbols
