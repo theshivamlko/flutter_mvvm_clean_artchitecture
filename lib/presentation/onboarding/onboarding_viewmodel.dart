@@ -35,21 +35,24 @@ class OnBoardingViewModel extends BaseViewModel
   }
 
   @override
-  void goNext() {
+  int goNext() {
     if (_currentIndex < 2) {
       print(_currentIndex);
       ++_currentIndex;
     }
-    _postDataToView();
+//    _postDataToView();
+
+    return _currentIndex;
   }
 
   @override
-  void goPrevious() {
+  int goPrevious() {
     if (_currentIndex > 0) {
       print(_currentIndex);
       --_currentIndex;
     }
-    _postDataToView();
+    //   _postDataToView();
+    return _currentIndex;
   }
 
   @override
@@ -77,14 +80,14 @@ class OnBoardingViewModel extends BaseViewModel
 
   _postDataToView() {
     inputSliderViewObject
-        .add(SlideViewObject(list.first, list.length, _currentIndex));
+        .add(SlideViewObject(list[_currentIndex], list.length, _currentIndex));
   }
 }
 
 // input from view to view model
 abstract class OnBoardingViewModelInputs {
-  void goNext(); // next PageView
-  void goPrevious(); // previous PageView
+  int goNext(); // next PageView
+  int goPrevious(); // previous PageView
   void onPageChange(int index);
 
   Sink<SlideViewObject> get inputSliderViewObject;

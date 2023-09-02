@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mvvm_clean_artchitecture/domain/SliderObject.dart';
+import 'package:flutter_mvvm_clean_artchitecture/presentation/onboarding/onboarding_viewmodel.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/color_manager.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/image_manager.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/routes_manager.dart';
@@ -16,46 +17,71 @@ class OnBoardingView extends StatefulWidget {
 class _OnBoardingViewState extends State<OnBoardingView> {
   PageController pageController = PageController(initialPage: 0);
 
+  OnBoardingViewModel _boardingViewModel = OnBoardingViewModel();
 
+  _bind() {
+    _boardingViewModel.start();
+  }
+
+  @override
+  void initState() {
+    _bind();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _boardingViewModel.dispose();
+    super.dispose();
+  }
+
+  Widget getContent(SlideViewObject? slideViewObject) {
+    if (slideViewObject == null) {
+      return Container();
+    } else {
+      return Scaffold(
+          backgroundColor: ColorManager.primary,
+          appBar: AppBar(
+            elevation: 0,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.purple,
+              statusBarBrightness: Brightness.dark,
+            ),
+          ),
+          body: PageView.builder(
+            itemBuilder: (ctx, index) =>
+                itemBuilder(ctx, index, slideViewObject),
+            itemCount: slideViewObject.noOfSlides,
+            controller: pageController,
+            onPageChanged:_boardingViewModel.onPageChange,
+          ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: ColorManager.primary,
-        appBar: AppBar(
-          elevation: 0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.purple,
-            statusBarBrightness: Brightness.dark,
-          ),
-        ),
-        body: PageView.builder(
-          itemBuilder: itemBuilder,
-          itemCount: list.length,
-          controller: pageController,
-          onPageChanged: (index) {},
-        ));
+    return StreamBuilder<SlideViewObject>(
+        stream: _boardingViewModel.outputSliderViewObject,
+        builder: (context, snapshot) {
+          return getContent(snapshot.data);
+        });
   }
 
-  Widget itemBuilder(ctx, index) {
+  Widget itemBuilder(ctx, index, SlideViewObject? slideViewObject) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            list[index].title,
+            slideViewObject?.sliderObjects.title ?? "",
             style: StyleManager.getHeadlineStyle(color: Colors.white),
           ),
           ElevatedButton(
               onPressed: () {
-                int i = index;
-                if (i < 2) {
-                  print(i);
-                  pageController.animateToPage((++i),
-                      duration: Duration(seconds: 1), curve: Curves.bounceIn);
-                } else if (i == 2) {
-                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
-                }
+                pageController.animateToPage(_boardingViewModel.goNext(),
+                    duration: Duration(seconds: 1), curve: Curves.bounceIn);
+
+                //     Navigator.pushReplacementNamed(context, Routes.loginRoute);
               },
               child: Text("NEXT"))
         ],
@@ -63,4 +89,3 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     );
   }
 }
-
