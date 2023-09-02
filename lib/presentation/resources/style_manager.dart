@@ -1,5 +1,5 @@
-import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/fonts_manager.dart';
 
 class StyleManager {
@@ -27,7 +27,7 @@ class StyleManager {
     );
   }
  static TextStyle getHeadlineStyle(
-      {double fontSize = FontSize.s25, required Color color}) {
+      {double fontSize = FontSize.s40, required Color color}) {
     return _getTextStyle(
       fontSize,
       FontsManager.fontFamily,
