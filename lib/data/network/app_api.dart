@@ -11,5 +11,8 @@ abstract class AppServiceClient {
 
   @Headers(<String, dynamic>{"Content-Type": "application/json"})
   @POST("/customers/login")
-  Future<AuthenticationResponse> login(Map<String, String> body);
+  Future<AuthenticationResponse> login(
+      @Field("email") String email,
+      @Field("password") String password,
+      );
 }

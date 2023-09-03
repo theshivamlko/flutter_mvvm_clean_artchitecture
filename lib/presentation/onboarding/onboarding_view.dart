@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mvvm_clean_artchitecture/domain/SliderObject.dart';
-import 'package:flutter_mvvm_clean_artchitecture/presentation/onboarding/onboarding_viewmodel.dart';
+ import 'package:flutter_mvvm_clean_artchitecture/presentation/onboarding/onboarding_viewmodel.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/color_manager.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/image_manager.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/routes_manager.dart';
@@ -78,10 +77,14 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           ),
           ElevatedButton(
               onPressed: () {
-                pageController.animateToPage(_boardingViewModel.goNext(),
-                    duration: Duration(seconds: 1), curve: Curves.bounceIn);
+                if(_boardingViewModel.getCurrentIndex()<2) {
+                  pageController.animateToPage(_boardingViewModel.goNext(),
+                      duration: Duration(seconds: 1), curve: Curves.bounceIn);
+                }
+                else{
+                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                }
 
-                //     Navigator.pushReplacementNamed(context, Routes.loginRoute);
               },
               child: Text("NEXT"))
         ],

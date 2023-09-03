@@ -1,9 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-class ContactsResponse {
+class ContactsModel {
   late String mobile;
   late String link;
-  ContactsResponse(this.mobile, this.link);
-
-
+  ContactsModel(this.mobile, this.link);
 }

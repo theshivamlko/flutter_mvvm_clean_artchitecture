@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter_mvvm_clean_artchitecture/domain/SliderObject.dart';
+ import 'package:flutter/cupertino.dart';
+import 'package:flutter_mvvm_clean_artchitecture/domain/models/SliderObject.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/base/BaseViewModel.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/onboarding/onboarding_view.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/image_manager.dart';
@@ -40,6 +41,7 @@ class OnBoardingViewModel extends BaseViewModel
       print(_currentIndex);
       ++_currentIndex;
     }
+
 //    _postDataToView();
 
     return _currentIndex;
@@ -82,6 +84,11 @@ class OnBoardingViewModel extends BaseViewModel
     inputSliderViewObject
         .add(SlideViewObject(list[_currentIndex], list.length, _currentIndex));
   }
+
+  @override
+  int getCurrentIndex() {
+   return _currentIndex;
+  }
 }
 
 // input from view to view model
@@ -89,6 +96,7 @@ abstract class OnBoardingViewModelInputs {
   int goNext(); // next PageView
   int goPrevious(); // previous PageView
   void onPageChange(int index);
+  int getCurrentIndex();
 
   Sink<SlideViewObject> get inputSliderViewObject;
 }
