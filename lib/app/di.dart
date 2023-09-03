@@ -39,9 +39,11 @@ Future<void> initAppModule() async {
 
 initLoginModule() {
   if (!GetIt.I.isRegistered<LoginUseCase>()) {
+    // Creates new instance every time
     instance
-        .registerLazySingleton<LoginUseCase>(() => LoginUseCase(instance()));
-    instance.registerLazySingleton<LoginViewModel>(
+        .registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
+
+    instance.registerFactory<LoginViewModel>(
         () => LoginViewModel(instance()));
   }
 }

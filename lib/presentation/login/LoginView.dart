@@ -94,7 +94,8 @@ class _LoginViewState extends State<LoginView> {
                       child: ElevatedButton(
                           onPressed: (snapshot.data ?? false) ? () {
 
-                            loginViewModel.login();
+                            loginViewModel.login().catchError((error){
+                            });
                           } : null,
                           child: Text("Login")),
                     ),

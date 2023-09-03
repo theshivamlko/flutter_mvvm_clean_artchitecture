@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_mvvm_clean_artchitecture/data/network/error_handler.dart';
 import 'package:flutter_mvvm_clean_artchitecture/data/network/failure.dart';
 
@@ -21,6 +22,9 @@ extension FailureExtension on int? {
       case HttpStatus.networkConnectTimeoutError:
         return Failure(HttpStatus.networkConnectTimeoutError,
             ResponseError.errorCodes[HttpStatus.networkConnectTimeoutError]!);
+      case 2:
+        return Failure(DioExceptionType.receiveTimeout.index,
+            ResponseError.errorCodes[DioExceptionType.receiveTimeout.index]!);
 
       default:
         return Failure(0, ResponseError.errorCodes[0]!);

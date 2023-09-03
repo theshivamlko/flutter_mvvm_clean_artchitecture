@@ -41,12 +41,13 @@ class LoginViewModel extends BaseViewModel
   Sink get inputUserName => _userNameController.sink;
 
   @override
-  login() async {
+  Future<dynamic> login() async {
     print(loginObject);
     (await loginUseCase?.execute(
             LoginUseCaseInput(loginObject.username, loginObject.password)))
         ?.fold((failure) {
       print(failure.message);
+      throw Exception(failure.message);
     }, (data) {
       print(data.customerModel?.name);
     });
@@ -110,7 +111,7 @@ abstract class LoginViewModelInputs {
 
   setPassword(String password);
 
-  login();
+  Future<dynamic> login();
 
   Sink get inputUserName;
 
