@@ -16,7 +16,7 @@ class LoginViewModel extends BaseViewModel
 
   var loginObject = LoginObject("", "");
 
-    LoginUseCase? loginUseCase;
+  late LoginUseCase loginUseCase;
 
   LoginViewModel(this.loginUseCase);
 
@@ -28,7 +28,8 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void start() {
-    // TODO: implement start
+    setUserName("abc@gmail.com");
+    setPassword("123456");
   }
 
   @override
@@ -41,6 +42,7 @@ class LoginViewModel extends BaseViewModel
 
   @override
   login() async {
+    print(loginObject);
     (await loginUseCase?.execute(
             LoginUseCaseInput(loginObject.username, loginObject.password)))
         ?.fold((failure) {
@@ -69,15 +71,21 @@ class LoginViewModel extends BaseViewModel
   @override
   setPassword(String password) {
     inputPassword.add(password);
-    loginObject = loginObject.copyWith(password: password);
+    print(loginObject);
+    loginObject = LoginObject(loginObject.username, password);
     inputIsAllInput.add(false);
+    print(password);
+    print(loginObject);
   }
 
   @override
   setUserName(String username) {
     inputUserName.add(username);
-    loginObject = loginObject.copyWith(username: username);
+    print(loginObject);
+    loginObject = LoginObject(username, loginObject.password);
     inputIsAllInput.add(false);
+    print(username);
+    print(loginObject);
   }
 
   @override
@@ -86,17 +94,16 @@ class LoginViewModel extends BaseViewModel
 
   @override
   // TODO: implement outputIsAllInputsValid
-  Stream<bool> get outputIsAllInputsValid => _buttonController.stream.map((event) => _isAllInputValid());
+  Stream<bool> get outputIsAllInputsValid =>
+      _buttonController.stream.map((event) => _isAllInputValid());
 
   bool _isAllInputValid() {
-
-    var res= _isPasswordValid(loginObject.username) && _isUserValid(loginObject.password);
+    var res = _isPasswordValid(loginObject.username) &&
+        _isUserValid(loginObject.password);
     print(res);
     return res;
   }
-
 }
-
 
 abstract class LoginViewModelInputs {
   setUserName(String username);
@@ -108,6 +115,7 @@ abstract class LoginViewModelInputs {
   Sink get inputUserName;
 
   Sink get inputPassword;
+
   Sink get inputIsAllInput;
 }
 

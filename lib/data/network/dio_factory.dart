@@ -1,4 +1,3 @@
-import 'dart:js_interop';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -15,8 +14,8 @@ class DioFactory {
     String lang=await _appPreference.getLanguage();
     Dio dio = Dio();
     Map<String, dynamic> headers = {
-      "content-type": "application/json",
-      "apiKey": "bdnd82e2njdfn0ufjsnfkjs="
+   //   "contentType": "application/json",
+      // "apiKey": "bdnd82e2njdfn0ufjsnfkjs="
     };
     int _timeOut = 6; // secs
 
