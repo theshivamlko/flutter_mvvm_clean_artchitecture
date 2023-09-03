@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/login/login_viewmodel.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/image_manager.dart';
+import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/routes_manager.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -92,6 +93,16 @@ class _LoginViewState extends State<LoginView> {
                 ],
               );
             }
+          ),
+       Spacer(flex: 1,),
+          GestureDetector(
+            onTap: (){
+              Navigator.pushNamed(context, Routes.forgotPasswordRoute);
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Forgot Password?"),
+            ),
           )
         ],
       ),
