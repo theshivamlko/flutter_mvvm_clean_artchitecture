@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/routes_manager.dart';
 import 'package:flutter_mvvm_clean_artchitecture/presentation/resources/theme_manager.dart';
 
+// v 3.10.6
 class MyApp extends StatefulWidget {
   MyApp._internal();
 
@@ -17,6 +18,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
