@@ -55,7 +55,7 @@ class _Page1State extends State<Page1> implements CryptoListView {
             child: CustomPaint(
               size: Size(size.width, 200),
               painter: MyCustomPainter(),
-              child: Text("${Calculation().sqrt(256)}",style: TextStyle(fontSize: 30),),
+              child: Center(child: Text("${Calculation().sqrt(256)}",style: TextStyle(fontSize: 30),)),
             ),
           ),
         ],
