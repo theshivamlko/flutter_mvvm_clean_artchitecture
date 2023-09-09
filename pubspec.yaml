@@ -29,6 +29,14 @@ dependencies:
   freezed: ^2.4.2
   get_it: any
 
+  #Modules
+  cutome_painter_flutter:
+    path: ../cutome_painter_flutter
+
+  flutter_module:
+    path: ../flutter_module
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
