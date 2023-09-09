@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_clean_artchitecture/app/app.dart';
-import 'package:flutter_mvvm_clean_artchitecture/app/di.dart';
+import 'package:flutter_mvvm_clean_artchitecture/mvp/di.dart';
+import 'package:flutter_mvvm_clean_artchitecture/mvp/mvp.dart';
+
+import 'mvvm/app/app.dart';
+import 'mvvm/app/di.dart';
 
 void main()async {
 
@@ -9,7 +12,9 @@ void main()async {
   await initAppModule();
   await Future.delayed(Duration(seconds: 2));
 
-  runApp(MyApp());
+  Injector.configure(Flavor.MOCK);
+//  runApp(MyApp());
+  runApp(MVPApp());
 }
 
 

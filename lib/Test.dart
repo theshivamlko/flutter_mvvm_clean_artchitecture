@@ -1,7 +1,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_clean_artchitecture/app/app.dart';
+
+import 'mvvm/app/app.dart';
 
 class Test extends StatelessWidget {
   const Test({super.key});
